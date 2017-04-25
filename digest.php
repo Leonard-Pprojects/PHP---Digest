@@ -5,7 +5,7 @@ class digest{
     private $realm = "Unbekannt";
     private $error = "Der Zugriff zu dieser Seite ist Ihnen untersagt";
     
-	function add($user, $pass)
+	public function add($user, $pass)
 	{
 		if(is_array($user) OR is_array($pass))
 		{
@@ -26,7 +26,7 @@ class digest{
 		}
 	}
 	
-	function send()
+	private function send()
 	{
 		header('WWW-Authenticate: Basic realm="'.$this->realm.'"');
 		header('HTTP/1.0 401 Unauthorized');
@@ -34,7 +34,7 @@ class digest{
 		exit;
 	}
 	
-	function realm($string)
+	public function realm($string)
 	{
 		if(empty($string) == false)
 		{
@@ -42,7 +42,7 @@ class digest{
 		}
 	}
 	
-	function error($string)
+	public function error($string)
 	{
 		if(empty($string) == false)
 		{
@@ -50,7 +50,7 @@ class digest{
 		}
 	}
 	
-	function check($username,$passwort)
+	private function check($username,$passwort)
 	{
 		$i = 0;
 		$gueltig = false;
@@ -80,7 +80,7 @@ class digest{
 		}
 	}
 	
-	function start()
+	public function start()
 	{
 		if(empty($_SERVER['PHP_AUTH_USER']) == false && empty($_SERVER['PHP_AUTH_PW']) == false)
 		{
